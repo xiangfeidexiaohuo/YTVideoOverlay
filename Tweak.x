@@ -238,11 +238,13 @@ static void sortButtons(NSMutableArray <NSString *> *buttons) {
 }
 
 - (NSMutableArray *)topButtonControls {
-    return topControls(self, %orig);
+    NSMutableArray *controls = %orig;
+    return topControls(self, controls);
 }
 
 - (NSMutableArray *)topControls {
-    return topControls(self, %orig);
+    NSMutableArray *controls = %orig;
+    return topControls(self, controls);
 }
 
 - (void)setTopOverlayVisible:(BOOL)visible isAutonavCanceledState:(BOOL)canceledState {
@@ -406,7 +408,8 @@ static void sortButtons(NSMutableArray <NSString *> *buttons) {
 - (NSArray <NSNumber *> *)orderedCategories {
     if (self.type != 1 || class_getClassMethod(objc_getClass("YTSettingsGroupData"), @selector(tweaks)))
         return %orig;
-    NSMutableArray *mutableCategories = %orig.mutableCopy;
+    NSArray *categories = %orig;
+    NSMutableArray *mutableCategories = categories.mutableCopy;
     [mutableCategories insertObject:@(YTVideoOverlaySection) atIndex:0];
     return mutableCategories.copy;
 }
